@@ -87,8 +87,11 @@ public class TelemetryService {
             socket.receive(packetResponse);
             RTCarInfo data = new RTCarInfo(buffer);
             System.out.println("###\t\t RECEIVED UPDATE #" + updateCounter + " \t\t\t###");
-            System.out.println("#" + updateCounter + " - Response update: " + data.toString());
+            System.out.println("#" + updateCounter + " - Response update: " + data.getSpeed_Kmh());
             System.out.println(separator);
+
+            this.unsubscribe();
+            this.subscribe(OperationId.SUBSCRIBE_UPDATE);
         }
     }
 
@@ -107,18 +110,34 @@ public class TelemetryService {
             System.out.println("#1 - Response. Received: " + response.toString());
             System.out.println(separator);
 
-            // Step 2 -- Avviso il server su che cosa mi interessa essere aggiornato
-            System.out.println("###\t\t STEP 2 SUBSCRIPTION PHASE \t\t###");
-            changeHandshakeDatagramFlags(0, 0, OperationId.SUBSCRIBE_UPDATE);
-            buffer = handshake.getDataAsByte();
-            packet = new DatagramPacket(buffer, buffer.length, this.address, Constants.PORT);
-            socket.send(packet);
+            this.subscribe(OperationId.SUBSCRIBE_UPDATE);
 
             // A questo punto sono registrato come un listener
             System.out.println(separator);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void subscribe(int subscriptionType) throws IOException {
+        byte[] buffer;
+        // Step 2 -- Avviso il server su che cosa mi interessa essere aggiornato
+        System.out.println("###\t\t STEP 2 SUBSCRIPTION PHASE \t\t###");
+        changeHandshakeDatagramFlags(1, 1, subscriptionType);
+        buffer = handshake.getDataAsByte();
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, this.address, Constants.PORT);
+        socket.send(packet);
+    }
+
+    public void unsubscribe() throws IOException {
+        byte[] buffer = handshake.getDataAsByte();
+        DatagramPacket packet = new DatagramPacket(buffer, buffer.length, this.address, Constants.PORT);
+        socket.send(packet);
+        buffer = new byte[HandshakeResponse.SIZE];
+        DatagramPacket packetResponse = new DatagramPacket(buffer, buffer.length);
+        socket.receive(packetResponse);
+        HandshakeResponse response = new HandshakeResponse(packetResponse.getData());
+        System.out.println(separator);
     }
 
     public void closeSocket(){
