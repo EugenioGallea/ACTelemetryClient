@@ -1,6 +1,6 @@
-package it.polito.s241876.client.ac_interaction.data;
+package ac_interaction.data;
 
-import it.polito.s241876.client.ac_interaction.structutils.StructReader;
+import ac_interaction.structutils.StructReader;
 
 import java.io.IOException;
 

@@ -1,9 +1,9 @@
-package it.polito.s241876.client.ac_interaction.utils;
+package ac_interaction.utils;
 
-import it.polito.s241876.client.ac_interaction.data.OperationId;
-import it.polito.s241876.client.ac_interaction.data.RTCarInfo;
-import it.polito.s241876.client.ac_interaction.data.RTLap;
-import it.polito.s241876.client.ac_interaction.protocol.HandshakeResponse;
+import ac_interaction.data.OperationId;
+import ac_interaction.data.RTCarInfo;
+import ac_interaction.data.RTLap;
+import ac_interaction.protocol.HandshakeResponse;
 
 import java.io.IOException;
 

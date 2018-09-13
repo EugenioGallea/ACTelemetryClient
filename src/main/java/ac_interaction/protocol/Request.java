@@ -1,4 +1,4 @@
-package it.polito.s241876.client.ac_interaction.protocol;
+package ac_interaction.protocol;
 
 import java.io.*;
 

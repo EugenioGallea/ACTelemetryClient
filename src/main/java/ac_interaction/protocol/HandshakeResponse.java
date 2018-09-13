@@ -1,6 +1,6 @@
-package it.polito.s241876.client.ac_interaction.protocol;
+package ac_interaction.protocol;
 
-import it.polito.s241876.client.ac_interaction.structutils.StructReader;
+import ac_interaction.structutils.StructReader;
 
 public class HandshakeResponse {
     private static final int CAR_NAME_SIZE = 50;

@@ -1,4 +1,4 @@
-package it.polito.s241876.client.ac_interaction.data;
+package ac_interaction.data;
 
 public interface OperationId {
     public static final int HANDSHAKE = 0;

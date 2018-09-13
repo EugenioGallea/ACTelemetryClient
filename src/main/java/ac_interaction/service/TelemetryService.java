@@ -1,12 +1,11 @@
-package it.polito.s241876.client.ac_interaction.service;
+package ac_interaction.service;
 
-import it.polito.s241876.client.ac_interaction.data.OperationId;
-import it.polito.s241876.client.ac_interaction.data.RTCarInfo;
-import it.polito.s241876.client.ac_interaction.data.RTLap;
-import it.polito.s241876.client.ac_interaction.protocol.HandshakeResponse;
-import it.polito.s241876.client.ac_interaction.protocol.Request;
-import it.polito.s241876.client.ac_interaction.utils.ConnectionInfo;
-import it.polito.s241876.server.service.CarInfoManager;
+import ac_interaction.data.OperationId;
+import ac_interaction.data.RTCarInfo;
+import ac_interaction.data.RTLap;
+import ac_interaction.protocol.HandshakeResponse;
+import ac_interaction.protocol.Request;
+import ac_interaction.utils.ConnectionInfo;
 
 import java.io.IOException;
 import java.net.*;
@@ -17,12 +16,10 @@ import java.net.*;
 public class TelemetryService {
     private DatagramSocket socket;
     private InetAddress address;
-    private CarInfoManager infoManager;
     private static final String TAG = "[TelemetryService] ";
 
     public TelemetryService() {
         this.setupSocketInfo();
-        this.infoManager = CarInfoManager.getInstance();
     }
 
     /**
@@ -121,7 +118,6 @@ public class TelemetryService {
                 this.closeSocket(); // Close the socket
             } else { // Everything ok
                 //System.out.println(TAG + ++updateCounter + " - Response update: " + data.toString());
-                this.infoManager.evaluateCarInfo(data);
             }
         }
     }

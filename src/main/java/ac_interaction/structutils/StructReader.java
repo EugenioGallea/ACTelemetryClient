@@ -1,4 +1,4 @@
-package it.polito.s241876.client.ac_interaction.structutils;
+package ac_interaction.structutils;
 
 import java.io.ByteArrayInputStream;
 

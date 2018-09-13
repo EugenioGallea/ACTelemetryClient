@@ -1,4 +1,4 @@
-package it.polito.s241876.client.ac_interaction.utils;
+package ac_interaction.utils;
 
 public interface ConnectionInfo {
     int PORT = 9996;

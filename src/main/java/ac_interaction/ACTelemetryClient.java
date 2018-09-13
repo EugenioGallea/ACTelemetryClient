@@ -1,7 +1,7 @@
-package it.polito.s241876.client.ac_interaction;
+package ac_interaction;
 
-import it.polito.s241876.client.ac_interaction.data.OperationId;
-import it.polito.s241876.client.ac_interaction.service.TelemetryService;
+import ac_interaction.data.OperationId;
+import ac_interaction.service.TelemetryService;
 
 public class ACTelemetryClient {
 
