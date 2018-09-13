@@ -1,6 +1,6 @@
-package data;
+package ac_interaction.data;
 
-import structutils.StructReader;
+import ac_interaction.structutils.StructReader;
 
 import java.io.IOException;
 

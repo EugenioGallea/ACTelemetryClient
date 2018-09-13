@@ -1,4 +1,4 @@
-package data;
+package ac_interaction.data;
 
 public enum Status {
     init,

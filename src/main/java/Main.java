@@ -1,8 +1,7 @@
-import service.TelemetryService;
+import ac_interaction.ACTelemetryClient;
 
 public class Main{
    public static void main(String[] args){
-       TelemetryService telemetryService = new TelemetryService();
-       telemetryService.run();
+       ACTelemetryClient.run();
    }
 }

@@ -1,31 +1,17 @@
-package handshake;
+package ac_interaction.protocol;
 
 import java.io.*;
 
-public class HandshakeRequest {
+public class Request {
     private Data data;
 
-    public HandshakeRequest(int identifier, int version, int operationId){
+    public Request() { }
+
+    public Request(int identifier, int version, int operationId){
         this.data = new Data();
         this.data.identifier = identifier;
         this.data.version = version;
         this.data.operationId = operationId;
-    }
-
-    public void setIdentifier(int identifier) {
-        this.data.identifier = identifier;
-    }
-
-    public void setVersion(int version) {
-        this.data.version = version;
-    }
-
-    public void setOperationId(int operationId) {
-        this.data.operationId = operationId;
-    }
-
-    public Serializable getData(){
-        return this.data;
     }
 
     public byte[] getDataAsByte() {
@@ -34,11 +20,13 @@ public class HandshakeRequest {
         ObjectOutput out;
         try {
             out = new ObjectOutputStream(bos);
-            out.writeObject(this.data);
+            out.write(this.data.identifier);
+            out.write(this.data.version);
+            out.write(this.data.operationId);
             out.flush();
             bytes = bos.toByteArray();
-        } catch (IOException e) {
-            //e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 bos.close();
@@ -50,13 +38,9 @@ public class HandshakeRequest {
         return bytes;
     }
 
-    public int getOperationId() {
-        return this.data.operationId;
-    }
-
     @Override
     public String toString() {
-        return "HandshakeRequest{" +
+        return "Request{" +
                 "identifier = " + data.identifier +
                 "version = " + data.version +
                 "operationId = " + data.operationId +
@@ -67,5 +51,7 @@ public class HandshakeRequest {
         int identifier;
         int version;
         int operationId;
+
+        Data() { }
     }
 }
