@@ -1,6 +1,6 @@
-package structutils;
+package it.polito.s241876.client.ac_interaction.structutils;
 
-import com.google.common.io.*;
+import com.google.common.io.LittleEndianDataOutputStream;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

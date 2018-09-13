@@ -1,14 +1,17 @@
-package data;
+package it.polito.s241876.client.ac_interaction.data;
 
-import structutils.StructReader;
+import it.polito.s241876.client.ac_interaction.structutils.StructReader;
 
 import java.io.IOException;
 import java.util.Arrays;
 
 public class RTCarInfo {
-    public static final int RT_CAR_INFO_SIZE = 2800;
+    public static final int RT_CAR_INFO_SIZE = 328;
 
-    private int identifier;
+    private char identifier;
+    private char dummy1;
+    private char dummy2;
+    private char dummy3;
     private int size;
 
     private float speed_Kmh;
@@ -60,8 +63,12 @@ public class RTCarInfo {
 
     public RTCarInfo(byte[] received) throws IOException {
         StructReader structReader = new StructReader(received);
-        identifier = structReader.readInt();
+        identifier = structReader.readChar();   // NEW API
+        this.dummy1 = structReader.readChar();  // NEW API
+        this.dummy2 = structReader.readChar();  // NEW API
+        this.dummy3 = structReader.readChar();  // NEW API
         size = structReader.readInt();
+
         speed_Kmh = structReader.readFloat();
         speed_Mph = structReader.readFloat();
         speed_Ms = structReader.readFloat();
@@ -88,28 +95,28 @@ public class RTCarInfo {
         steer = structReader.readFloat();
         gear = structReader.readInt();
         cgHeight = structReader.readFloat();
-        wheelAngularSpeed = structReader.readFloats(4);
-        slipAngle = structReader.readFloats(4);
-        slipAngle_ContactPatch = structReader.readFloats(4);
-        slipRatio = structReader.readFloats(4);
-        tyreSlip = structReader.readFloats(4);
-        ndSlip = structReader.readFloats(4);
-        load = structReader.readFloats(4);
-        Dy = structReader.readFloats(4);
-        Mz = structReader.readFloats(4);
-        tyreDirtyLevel = structReader.readFloats(4);
+        wheelAngularSpeed = structReader.wreadFloats(4);
+        slipAngle = structReader.wreadFloats(4);
+        slipAngle_ContactPatch = structReader.wreadFloats(4);
+        slipRatio = structReader.wreadFloats(4);
+        tyreSlip = structReader.wreadFloats(4);
+        ndSlip = structReader.wreadFloats(4);
+        load = structReader.wreadFloats(4);
+        Dy = structReader.wreadFloats(4);
+        Mz = structReader.wreadFloats(4);
+        tyreDirtyLevel = structReader.wreadFloats(4);
 
-        camberRAD = structReader.readFloats(4);
-        tyreRadius = structReader.readFloats(4);
-        tyreLoadedRadius = structReader.readFloats(4);
-        suspensionHeight = structReader.readFloats(4);
+        camberRAD = structReader.wreadFloats(4);
+        tyreRadius = structReader.wreadFloats(4);
+        tyreLoadedRadius = structReader.wreadFloats(4);
+        suspensionHeight = structReader.wreadFloats(4);
         carPositionNormalized = structReader.readFloat();
         carSlope = structReader.readFloat();
 
-        carCoordinates = structReader.readFloats(3);
+        carCoordinates = structReader.wreadFloats(5); // NEW API
     }
 
-    public int getIdentifier() {
+    public char getIdentifier() {
         return identifier;
     }
 
@@ -201,6 +208,9 @@ public class RTCarInfo {
     public String toString() {
         return "data.RTCarInfo{" +
                 "identifier=" + identifier +
+                ", dummy1=" + dummy1 +
+                ", dummy2=" + dummy2 +
+                ", dummy3=" + dummy3 +
                 ", size=" + size +
                 ", speed_Kmh=" + speed_Kmh +
                 ", speed_Mph=" + speed_Mph +
